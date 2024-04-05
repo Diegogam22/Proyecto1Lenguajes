@@ -5,7 +5,7 @@
   margin-bottom: 40px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
 }
 
@@ -39,17 +39,17 @@
 #searchResults {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px; /* Espacio adicional debajo de la tabla */
+  margin-bottom: 20px; 
 }
 
 #searchResults th,
 #searchResults td {
   padding: 8px;
-  border: 1px solid #ddd; /* Borde para las celdas */
+  border: 1px solid #ddd; 
 }
 
 #searchResults th {
-  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+  background-color: #f2f2f2; 
 }
 
 /* Estilos para el contenedor de paginación */

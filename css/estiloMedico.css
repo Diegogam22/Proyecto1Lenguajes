@@ -2,7 +2,7 @@
   margin-bottom: 20px;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
 }
 
 .search-bar input {
@@ -42,26 +42,26 @@
 
 /* Estilos para el modal */
 .modal {
-  display: none; /* Ocultar el modal por defecto */
-  position: fixed; /* Posición fija en la ventana del navegador */
-  z-index: 1; /* Colocar el modal por encima del resto del contenido */
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
   left: 0;
   top: 0;
-  width: 100%; /* Ancho completo */
-  height: 100%; /* Altura completa */
-  overflow: auto; /* Agregar desplazamiento si es necesario */
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 /* Contenido del modal */
 .modal-content {
-  background-color: #fefefe; /* Fondo blanco */
-  margin: 15% auto; /* Centrar vertical y horizontalmente */
+  background-color: #fefefe; 
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Ancho del contenido del modal */
+  width: 80%; 
   border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
 }
 
 /* Botón para cerrar el modal */

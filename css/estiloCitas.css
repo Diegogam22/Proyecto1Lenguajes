@@ -33,14 +33,13 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 0 4px; /* Espacio entre botones */
+  margin: 0 4px;
 }
 
 #programarCitaFormulario button[type="submit"]:hover {
   background-color: rgb(0, 178, 178);
 }
 
-/* Estilos para el formulario de modificación y cancelación de citas */
 #modificarCancelarCitaFormulario {
   background-color: #f9f9f9;
   padding: 20px;
@@ -75,7 +74,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin: 0 4px; /* Espacio entre botones */
+  margin: 0 4px;
 }
 
 #modificarCancelarCitaFormulario button:hover {
@@ -87,7 +86,6 @@
   cursor: not-allowed;
 }
 
-/* Estilos para el modal */
 .modal {
   display: none;
   position: fixed;
@@ -100,7 +98,6 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Contenedor del contenido del modal */
 .modal-content {
   background-color: #f8f9fa;
   margin: 10% auto;
@@ -192,11 +189,7 @@
 /* Estilos para los botones de navegación del calendario al pasar el mouse sobre ellos */
 #btnMesAnterior:hover,
 #btnMesSiguiente:hover {
-  background-color: rgb(
-    0,
-    178,
-    178
-  ); /* Color de fondo más oscuro al pasar el mouse */
+  background-color: rgb(0, 178, 178);
 }
 
 /* Estilos para el contenedor de la semana */
@@ -208,9 +201,9 @@
   ); /* 7 columnas para los días de la semana */
 }
 
-/* Ocultar el texto de las citas en los días con citas */
+/* Oculta el texto de las citas en los días con citas */
 .dia.con-cita {
-  background-color: yellow; /* Cambia el color de fondo para los días con citas */
+  background-color: yellow;
 }
 
 /* Estilos para el popover */
@@ -255,8 +248,8 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  max-width: 100%; /* Agrega un ancho máximo */
-  margin: auto; /* Centra horizontalmente */
+  max-width: 100%;
+  margin: auto;
 }
 
 .paginacion button {
@@ -297,26 +290,26 @@
 
 /* Estilos para el modal */
 #modal {
-  display: none; /* Por defecto, ocultar el modal */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 9999; /* Asegurar que esté por encima de todo */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
   overflow: auto;
 }
 
 #modalContent {
-  background-color: #fefefe; /* Color de fondo del modal */
-  margin: 15% auto; /* Centrar vertical y horizontalmente */
+  background-color: #fefefe;
+  margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Ancho del modal */
-  max-width: 600px; /* Ancho máximo del modal */
+  width: 80%;
+  max-width: 600px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilos para el botón de confirmación */

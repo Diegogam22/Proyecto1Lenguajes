@@ -14,7 +14,7 @@
       <main>
         <h1>Búsqueda de Médicos</h1>
         <div class="search-bar">
-          <!-- Campo de búsqueda con autocompletar -->
+
           <input
             type="text"
             id="searchInput"
@@ -26,22 +26,22 @@
           <datalist id="doctorList"></datalist>
 
           <button class="buscar" onclick="search()">Buscar</button>
-          <!-- Selección de orden -->
+   
           <select id="sortSelect" onchange="sortResults()">
             <option value="name">Nombre</option>
             <option value="specialty">Especialidad</option>
             <option value="location">Ubicación</option>
           </select>
         </div>
-        <!-- Resultados de búsqueda -->
+
         <table class="results" id="searchResults"></table>
-        <!-- Paginación -->
+
         <div id="pagination"></div>
       </main>
-      <!-- Footer -->
+
       <footer id="footer"></footer>
     </div>
-    <!-- Modal -->
+
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -50,7 +50,7 @@
     </div>
 
 
-    <!-- Scripts -->
+
     <script src="../js/navbar.js"></script>
     <script src="../js/verificarAutenticacion.js"></script>
     <script src="../js/medicos.js" defer></script>

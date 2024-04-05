@@ -46,8 +46,8 @@
 
 .carousel-container {
   position: relative;
-  width: 100%; /* Cambiado a ancho del 100% para ser responsive */
-  max-width: 50rem; /* Agregado max-width para limitar el ancho máximo */
+  width: 100%; 
+  max-width: 50rem; 
   height: 25rem;
   overflow: hidden;
   margin: 0 auto;

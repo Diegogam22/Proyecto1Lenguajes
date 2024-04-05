@@ -47,8 +47,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
-  max-height: 120px; /* Establece el tamaño máximo de altura */
-  resize: vertical; /* Permite solo la redimensión vertical */
+  max-height: 120px; 
+  resize: vertical; 
 }
 
 .contact-form button {
@@ -70,7 +70,7 @@
 }
 
 .map {
-  margin: 0 auto; /* Centrado horizontal */
+  margin: 0 auto; 
 }
 
 #toast-container {

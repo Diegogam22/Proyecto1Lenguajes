@@ -40,6 +40,6 @@
 }
 
 .appointment-types li.tipos::before {
-  content: "•"; /* Agrega un punto antes de cada elemento */
-  margin-right: 5px; /* Espacio entre el punto y el texto */
+  content: "•";
+  margin-right: 5px;
 }

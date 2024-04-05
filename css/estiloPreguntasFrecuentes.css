@@ -11,7 +11,7 @@ details {
 summary {
   font-weight: bold;
   cursor: pointer;
-  list-style: none; /* Elimina el estilo de viñeta predeterminado */
+  list-style: none; 
 }
 
 /* Estilos para el contenido del acordeón */
@@ -21,12 +21,12 @@ details div {
   margin-top: 0.5rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: max-height 0.3s ease-out; /* Transición suave de 300ms */
-  max-height: 0; /* Oculta el contenido inicialmente */
-  overflow: hidden; /* Evita que el contenido desborde */
+  transition: max-height 0.3s ease-out; 
+  max-height: 0; 
+  overflow: hidden; 
 }
 
 /* Muestra el contenido cuando el acordeón está abierto */
 details[open] div {
-  max-height: 500px; /* Ajusta este valor según la cantidad de contenido */
+  max-height: 500px; 
 }
