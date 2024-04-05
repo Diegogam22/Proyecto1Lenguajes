@@ -1,3 +1,4 @@
+// crea el navbar generico
 const contenedorPrincipal = document.querySelector(".contenedor__principal");
 const navbar = `
       <header>

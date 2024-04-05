@@ -1,3 +1,4 @@
+// es para mostrar los mensajes y no usar alert
 function showToast(message) {
   const toastContainer = document.getElementById("toast-container");
   const toast = document.createElement("div");
@@ -16,20 +17,19 @@ function showToast(message) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Obtener referencia al formulario
   const form = document.getElementById("programarCitaForm");
 
-  // Agregar event listener al formulario para el evento "submit"
+  // Agrega event listener al formulario para el evento "submit"
   form.addEventListener("submit", function (event) {
-    // Evitar que el formulario se envíe automáticamente
+    // Evita que el formulario se envíe automáticamente
     event.preventDefault();
 
-    // Obtener datos del formulario
+    // Obtiene datos del formulario
     const fechaHora = document.getElementById("fechaHora").value;
     const medicoId = document.getElementById("medico").value;
     const especialidad = document.getElementById("especialidad").value;
 
-    // Aquí deberías obtener la información del usuario autenticado del localStorage
+    // recupera el usuario autenticado
     const usuarioAutenticado = JSON.parse(
       localStorage.getItem("usuarioAutenticado")
     );
@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
 
-    // Crear objeto de cita con la información del usuario y la cita
+    // Crea el objeto de cita con la información del usuario y la cita
     const cita = {
-      id: getNextCitaId(), // Obtener el próximo ID de cita
+      id: getNextCitaId(), // Obtiene el próximo ID de cita (para que sea cree el ID como en SQL Server, como identity)
       fechaHora,
       medico: medicoId,
       especialidad,
@@ -49,22 +49,25 @@ document.addEventListener("DOMContentLoaded", function () {
       confirmado: false,
     };
 
-    // Validar solapamiento de citas
+    // Valida solapamiento de citas
     if (validarSolapamientoCitas(cita)) {
       showToast("Ya hay una cita programada para este horario.");
 
       return;
     }
 
-    // Programar la cita
+    // Programa la cita
     programarCita(cita);
 
-    // Limpiar el formulario después de guardar la cita
+    // Limpia el formulario después de guardar la cita
     form.reset();
   });
 });
 
 // Función para obtener el próximo ID de cita
+// es lo que mencione arriba
+//recupera el ultimo ID y lo hace sucesivo
+// si el id es 6, el nuevo va a ser 7
 function getNextCitaId() {
   let lastCitaId = localStorage.getItem("lastCitaId") || 0;
   lastCitaId = parseInt(lastCitaId);
@@ -75,23 +78,25 @@ function getNextCitaId() {
 
 // Función para validar solapamientos de citas
 function validarSolapamientoCitas(nuevaCita) {
-  // Obtener citas existentes del almacenamiento local
+  // Recupera las citas existentes del almacenamiento local
   const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
 
   // Verificar si hay solapamiento con alguna cita existente
   const solapamiento = citasGuardadas.some((cita) => {
-    // Convertir las fechas de cadena a objetos Date para facilitar la comparación
+    // Convierte las fechas de cadena a objetos Date para facilitar la comparación
+    //Esto lo hice asi porque me daba errores a la hora de comparar las citas
     const fechaHoraCitaExistente = new Date(cita.fechaHora);
     const fechaHoraNuevaCita = new Date(nuevaCita.fechaHora);
 
-    // Verificar solapamiento
+    // Verifica solapamiento
     return fechaHoraNuevaCita.getTime() === fechaHoraCitaExistente.getTime();
   });
 
   return solapamiento;
 }
 
-// Función para guardar la cita en el almacenamiento local
+// Funcion para guardar la cita en el almacenamiento local
+// Y las manejamos en el local stoarge
 function guardarCitaEnLocalStorage(cita) {
   const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
   citasGuardadas.push(cita);
@@ -106,50 +111,52 @@ function programarCita(cita) {
   );
   cita.usuarioId = usuarioAutenticado.id;
 
-  // Guardar la cita en el almacenamiento local
+  // Guarda la cita en el almacenamiento local
   guardarCitaEnLocalStorage(cita);
   showToast("Cita programada con éxito.");
 }
 
-//modificar cita
+//AQUI EMPIEZA LA LOGICA PARA MODIFICAR UNA CITA
 document.addEventListener("DOMContentLoaded", function () {
-  // Obtener la información del usuario autenticado del localStorage
+  // Primero obtenemos la información del usuario autenticado del localStorage
   const usuarioAutenticado = JSON.parse(
     localStorage.getItem("usuarioAutenticado")
   );
 
-  // Filtrar las citas para mostrar solo las del usuario autenticado
+  // Se filtran las citas para mostrar solo las del usuario autenticado
   const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
   const citasUsuarioAutenticado = citasGuardadas.filter(
     (cita) => cita.usuario && cita.usuario.cedula === usuarioAutenticado.cedula
   );
 
-  // Construir el menú desplegable de citas con las citas del usuario autenticado
+  // obtiene el select del html
   const citasSelect = document.getElementById("citas");
-  citasSelect.innerHTML = ""; // Limpiar las opciones anteriores
+  citasSelect.innerHTML = "";
 
+  // pega las citas del usuario en el select con su respectiva informacion
   citasUsuarioAutenticado.forEach((cita) => {
     const option = document.createElement("option");
     option.value = cita.id;
-    option.textContent = `${cita.fechaHora} - ${cita.especialidad}`; // Puedes mostrar más información si lo deseas
+    option.textContent = `${cita.fechaHora} - ${cita.especialidad}`;
     citasSelect.appendChild(option);
   });
 
-  // Agregar evento al botón "Modificar Cita"
+  // Agrega el evento al botón para modificar la cita
   const modificarCitaBtn = document.getElementById("modificarCitaBtn");
   modificarCitaBtn.addEventListener("click", function () {
-    // Obtener el valor seleccionado del menú desplegable de citas
+    // Obtiene el valor seleccionado del menú desplegable de citas
     const selectedCitaId = document.getElementById("citas").value;
 
     const citaSeleccionada = citasGuardadas.find(
       (cita) => cita.id === parseInt(selectedCitaId)
     );
 
-    // Abrir el modal para editar la cita seleccionada
+    // abre el modal para modificar la cita
     openModal(citaSeleccionada);
   });
 });
 
+// abre el modal para modificar la cita con la informacion respectiva
 function openModal(citaSeleccionada) {
   const modalContent = document.getElementById("modalContent");
 
@@ -171,6 +178,7 @@ function openModal(citaSeleccionada) {
   `;
   modalContent.innerHTML = modalHTML;
 
+  // recupera el nuevo medico
   const nuevoMedicoSelect = document.getElementById("nuevoMedico");
   doctors.forEach((doctor) => {
     const option = document.createElement("option");
@@ -184,17 +192,18 @@ function openModal(citaSeleccionada) {
     const nuevaEspecialidadSelect =
       document.getElementById("nuevaEspecialidad");
 
-    // Limpiar las opciones anteriores del select de especialidad
+    // Limpia las opciones anteriores del select de especialidad
+    // Porque dependiendo del medico, se cambia la especialidad
     while (nuevaEspecialidadSelect.firstChild) {
       nuevaEspecialidadSelect.removeChild(nuevaEspecialidadSelect.firstChild);
     }
-    // Obtener las especialidades del médico seleccionado
+    // Obteniene las especialidades del médico seleccionado
     const medicoSeleccionado = doctors.find(
       (doctor) => doctor.id === selectedMedicoId
     );
 
     if (medicoSeleccionado) {
-      // Agregar la especialidad del médico seleccionado al select de especialidades
+      // Agrega la especialidad del médico seleccionado al select de especialidades
       const option = document.createElement("option");
       option.value = medicoSeleccionado.specialty;
       option.textContent = medicoSeleccionado.specialty;
@@ -202,27 +211,27 @@ function openModal(citaSeleccionada) {
     }
   });
 
-  // Mostrar el modal
+  // Muesta el modal
   const modal = document.getElementById("modal");
   modal.style.display = "block";
 
-  // Manejar el envío del formulario dentro del modal
+  // Maneja el envío del formulario dentro del modal
   const formModificarCita = document.getElementById("formModificarCita");
   formModificarCita.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    // Obtener los nuevos valores del formulario
+    // Obtiene los nuevos valores del formulario del modal para cambiarlo despues en el local storage
     const nuevaFechaHora = document.getElementById("nuevaFechaHora").value;
     const nuevoMedicoId = document.getElementById("nuevoMedico").value;
     const nuevaEspecialidad =
       document.getElementById("nuevaEspecialidad").value;
 
-    // Actualizar la cita con los nuevos valores
+    // Actualiza la cita con los nuevos valores
     citaSeleccionada.fechaHora = nuevaFechaHora;
     citaSeleccionada.medico = nuevoMedicoId;
     citaSeleccionada.especialidad = nuevaEspecialidad;
 
-    // Guardar la cita actualizada en el almacenamiento local
+    // Guarda la cita actualizada en el almacenamiento local
     const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
     const index = citasGuardadas.findIndex(
       (cita) => cita.id === citaSeleccionada.id
@@ -238,29 +247,31 @@ function openModal(citaSeleccionada) {
   });
 }
 
-// CANCELAR CITA
+// AQUI EMPIEZA LA LOGICA PARA CANCELAR UNA CITA
+// QUE SERIA BASICAMENTE BORRARLA DEL LOCAL STORAGE
 
 function cargarCitas() {
-  // Obtener las citas guardadas del almacenamiento local
+  // Obtenemos las citas guardadas del almacenamiento local
   const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
 
-  // Obtener el usuario autenticado del almacenamiento local
+  // Obtenemos el usuario autenticado del almacenamiento local
   const usuarioAutenticado = JSON.parse(
     localStorage.getItem("usuarioAutenticado")
   );
 
-  // Filtrar las citas del usuario autenticado
+  // Filtramos las citas del usuario autenticado
   const citasUsuarioAutenticado = citasGuardadas.filter(
     (cita) => cita.usuario && cita.usuario.cedula === usuarioAutenticado.cedula
   );
 
-  // Obtener el elemento select donde se mostrarán las citas
+  // Obtenemos el elemento select donde se mostrarán las citas
+  // La cita que queremos cancelar
   const citasSelect = document.getElementById("citas");
 
-  // Limpiar el contenido actual del elemento select
+  // Limpia el contenido actual del elemento select
   citasSelect.innerHTML = "";
 
-  // Iterar sobre las citas del usuario autenticado y agregarlas como opciones al select
+  // recorremos las citas del usuario autenticado y agregarlas como opciones al select
   citasUsuarioAutenticado.forEach((cita) => {
     const option = document.createElement("option");
     option.value = cita.id;
@@ -270,21 +281,21 @@ function cargarCitas() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Agregar evento al botón "Cancelar Cita"
+  // Agrega evento al botón "Cancelar Cita"
   const cancelarCitaBtn = document.getElementById("cancelarCitaBtn");
   cancelarCitaBtn.addEventListener("click", function () {
-    // Obtener el valor seleccionado del menú desplegable de citas
+    // Obtenenemos el valor seleccionado del menú desplegable de citas
     const selectedCitaId = document.getElementById("citas").value.toString();
 
-    // Obtener las citas guardadas del almacenamiento local
+    // Obtenemos las citas guardadas del almacenamiento local
     const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
 
-    // Obtener el usuario autenticado del almacenamiento local
+    // Obtenemos el usuario autenticado del almacenamiento local
     const usuarioAutenticado = JSON.parse(
       localStorage.getItem("usuarioAutenticado")
     );
 
-    // Buscar la cita seleccionada en el array de citas guardadas
+    // Buscamos la cita seleccionada en el array de citas guardadas
     const index = citasGuardadas.findIndex(
       (cita) =>
         cita.id.toString() === selectedCitaId &&
@@ -297,13 +308,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Eliminar la cita del array de citas guardadas
       citasGuardadas.splice(index, 1);
 
-      // Actualizar el almacenamiento local con las citas actualizadas
+      // Actualiza el almacenamiento local con las citas actualizadas
       localStorage.setItem("citas", JSON.stringify(citasGuardadas));
 
-      // Actualizar el select de citas
+      // Actualiza el select de citas
       cargarCitas();
 
-      // Notificar al usuario que la cita ha sido cancelada
+      // Notifica al usuario que la cita ha sido cancelada
       showToast("La cita ha sido cancelada con éxito.");
     } else {
       // Si no se encuentra la cita seleccionada o no pertenece al usuario autenticado, mostrar un mensaje de error
@@ -314,8 +325,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// CALENDARIO
+// AQUI EMPIEZA TODA LA LOGICA DEL CALENDARIO
 
+// RECUPERAMOS LA INFORMACION
 document.addEventListener("DOMContentLoaded", function () {
   const calendarioContainer = document.getElementById("calendario");
   const btnMesAnterior = document.getElementById("btnMesAnterior");
@@ -329,9 +341,9 @@ document.addEventListener("DOMContentLoaded", function () {
     calendarioContainer.innerHTML = "";
 
     const citasGuardadas = obtenerCitasUsuarioAutenticado();
-    const nombreMes = obtenerNombreMes(fechaActual.getMonth()); // Obtener el nombre del mes actual
+    const nombreMes = obtenerNombreMes(fechaActual.getMonth()); // Obtenemos el nombre del mes actual
 
-    // Mostrar el nombre del mes en el elemento correspondiente
+    // Mostramos el nombre del mes en el elemento correspondiente
     const nombreMesElemento = document.createElement("h2");
     nombreMesElemento.textContent = nombreMes;
     calendarioContainer.appendChild(nombreMesElemento);
@@ -341,6 +353,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Basicamente lo que hace es acomodar el calendario
+  // con sus repectivos meses y dias
   function mostrarMes(citasGuardadas) {
     const añoActual = fechaActual.getFullYear();
     const mesActual = fechaActual.getMonth();
@@ -374,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (citasEnFecha.length > 0) {
           divDia.classList.add("con-cita");
           divDia.setAttribute("data-citas", JSON.stringify(citasEnFecha));
-          // Agregar evento de clic al día si tiene citas
+          //  evento de clic al día si tiene citas
           divDia.addEventListener("click", function () {
             mostrarModalConfirmacion(citasEnFecha);
           });
@@ -452,6 +466,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // se crea el array de los meses
   function obtenerNombreMes(numeroMes) {
     const nombresMeses = [
       "Enero",
@@ -471,6 +486,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// es el modal para confirmar una cita
 function showModal(content) {
   const modal = document.getElementById("modal");
   const modalContent = document.getElementById("modalContent");
@@ -479,26 +495,27 @@ function showModal(content) {
 }
 
 function mostrarModalConfirmacion(citasEnFecha) {
-  // Crear el contenido del modal con la lista de citas y el botón de confirmación
+  // Crea el contenido del modal con la lista de citas y el botón de confirmación
   let modalContent = "<h2>Confirmar Citas</h2>";
   modalContent += "<ul>";
 
-  // Agrupar citas por fecha
+  // Agrupamos citas por fecha
   const citasPorFecha = {};
   citasEnFecha.forEach((cita) => {
-    const fecha = cita.fechaHora.split("T")[0]; // Obtener la parte de la fecha sin la parte de la hora
+    const fecha = cita.fechaHora.split("T")[0];
     if (!citasPorFecha[fecha]) {
       citasPorFecha[fecha] = [];
     }
     citasPorFecha[fecha].push(cita);
   });
 
-  // Mostrar cada grupo de citas
+  //  grupo de citas
   for (const fecha in citasPorFecha) {
     if (citasPorFecha.hasOwnProperty(fecha)) {
       citasPorFecha[fecha].forEach((cita, index) => {
         modalContent += `<li>${cita.fechaHora} - ${cita.especialidad}</li>`;
-        // Agregar un separador entre citas, excepto para la última cita
+        // Agregamos un separador entre citas, excepto para la ultima cita
+        // Es para que se vea de una forma mas ordenada si hay varias citas el mismo dia
         if (index < citasPorFecha[fecha].length - 1) {
           modalContent += "<hr>";
         }
@@ -511,7 +528,7 @@ function mostrarModalConfirmacion(citasEnFecha) {
   // Mostrar el modal
   showModal(modalContent);
 
-  // Agregar evento al botón de confirmación
+  // Agrega evento al botón de confirmación
   const confirmarCitaBtn = document.getElementById("confirmarCitaBtn");
   confirmarCitaBtn.addEventListener("click", function () {
     confirmarCita(citasEnFecha);
@@ -519,12 +536,12 @@ function mostrarModalConfirmacion(citasEnFecha) {
 }
 
 function confirmarCita(citasEnFecha) {
-  // Actualizar el estado de confirmación de las citas en el localStorage
+  // Actualiza el estado de confirmación de las citas en el localStorage
   citasEnFecha.forEach((cita) => {
     cita.confirmada = true;
   });
 
-  // Guardar las citas actualizadas en el localStorage
+  // Guarda las citas actualizadas en el localStorage
   const citasGuardadas = JSON.parse(localStorage.getItem("citas")) || [];
   citasGuardadas.forEach((citaGuardada) => {
     citasEnFecha.forEach((cita) => {
@@ -548,7 +565,7 @@ function closeModal() {
 // HISTORIAL DE CITAS
 
 const historialCitasBody = document.querySelector("#historialCitas tbody"); // Obtener referencia al cuerpo de la tabla en el HTML
-let paginaActual = 1; // Inicializar la página actual
+let paginaActual = 1; // Inicializa la página actual
 const citasPorPagina = 6; // Número de citas a mostrar por página
 
 function mostrarHistorialCitas() {
@@ -564,9 +581,9 @@ function mostrarHistorialCitas() {
   const fin = inicio + citasPorPagina;
   const citasPaginadas = citasUsuarioAutenticado.slice(inicio, fin);
 
-  historialCitasBody.innerHTML = ""; // Limpiar el contenido anterior de la tabla
+  historialCitasBody.innerHTML = ""; // Limpia el contenido anterior de la tabla
   citasPaginadas.forEach((cita) => {
-    // Buscar el nombre del médico correspondiente en la lista de médicos
+    // Busca el nombre del médico correspondiente en la lista de médicos
 
     cita.medico;
     const medico = obtenerNombreMedico(cita.medico);
@@ -592,7 +609,7 @@ function mostrarBotonesPaginacion(paginasTotales) {
   const paginacionContainer = document.createElement("div");
   paginacionContainer.classList.add("paginacion");
 
-  // Limpiar el contenido anterior de la paginación
+  // Limpia el contenido anterior de la paginación
   paginacionContainer.innerHTML = "";
 
   for (let i = 1; i <= paginasTotales; i++) {
@@ -605,10 +622,10 @@ function mostrarBotonesPaginacion(paginasTotales) {
     paginacionContainer.appendChild(botonPagina);
   }
 
-  // Obtener el contenedor de historialCitas y agregar los botones de paginación
+  // Obtene el contenedor de historialCitas y agregar los botones de paginación
   const historialCitas = document.getElementById("historialCitas");
 
-  // Limpiar contenido anterior de paginación antes de agregar los botones
+  // Limpia contenido anterior de paginación antes de agregar los botones
   const paginacionAnterior = historialCitas.querySelector(".paginacion");
   if (paginacionAnterior) {
     paginacionAnterior.remove();
@@ -630,7 +647,7 @@ function obtenerCitasUsuarioAutenticado() {
   return citasUsuarioAutenticado;
 }
 
-// Llamada inicial para mostrar el historial de citas al cargar la página
+//  mostrar el historial de citas al cargar la página
 document.addEventListener("DOMContentLoaded", function () {
   mostrarHistorialCitas();
 });

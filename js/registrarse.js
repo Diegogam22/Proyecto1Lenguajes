@@ -19,9 +19,9 @@ let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
 // Función para validar las expresiones regulares y registrar un usuario
 function registrarUsuario(event) {
-  event.preventDefault(); // Evitar el comportamiento por defecto del formulario
+  event.preventDefault();
 
-  // Obtener los valores de los campos del formulario
+  // Obtiene los valores de los campos del formulario
   const cedula = document.getElementById("cedula").value.trim();
   const nombre = document.getElementById("nombre").value.trim();
   const apellidos = document.getElementById("apellidos").value.trim();
@@ -32,14 +32,14 @@ function registrarUsuario(event) {
     .getElementById("confirmarContrasenna")
     .value.trim();
 
-  // Validar si las contraseñas coinciden
+  // Valida si las contraseñas coinciden
   if (contrasenna !== confirmarContrasenna) {
     showToast("Las contraseñas no coinciden. Por favor, inténtalo de nuevo.");
 
     return;
   }
 
-  // Validar si algún campo está vacío
+  // Valida si algún campo está vacío
   if (
     !cedula ||
     !nombre ||
@@ -54,7 +54,7 @@ function registrarUsuario(event) {
     return;
   }
 
-  // Validar las expresiones regulares
+  // Valida las expresiones regulares
   const errores = {};
   if (!validarCorreo(correo)) {
     errores.correo = true;
@@ -77,10 +77,10 @@ function registrarUsuario(event) {
 
   if (Object.keys(errores).length > 0) {
     manejarError(errores);
-    return; // Evitar el registro si hay errores en las expresiones regulares
+    return; // Evita el registro si hay errores en las expresiones regulares
   }
 
-  // Validar si la cédula ya existe
+  // Valida si la cédula ya existe
   if (usuarioExistente(cedula)) {
     showToast(
       "La cédula ingresada ya existe en el sistema. Por favor, utiliza otra."
@@ -89,12 +89,12 @@ function registrarUsuario(event) {
     return;
   }
 
-  // Cifrar la contraseña utilizando SHA-256 de CryptoJS
+  // Cifra la contraseña
   const hashedPassword = CryptoJS.SHA256(contrasenna).toString(
     CryptoJS.enc.Base64
   );
 
-  // Crear objeto de usuario
+  // Crea objeto de usuario
   const usuario = {
     cedula,
     nombre,
@@ -104,16 +104,16 @@ function registrarUsuario(event) {
     contrasenna: hashedPassword,
   };
 
-  // Agregar usuario al array
+  // Agrega usuario al array
   usuarios.push(usuario);
 
-  // Almacenar en localStorage
+  // Almacena en localStorage
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-  // Limpiar el formulario
+  // Limpia el formulario
   document.getElementById("formulario").reset();
 
-  // Mostrar mensaje de éxito
+  // Muestra mensaje de éxito
   showToast("Registro exitoso. Bienvenido, " + nombre + "!");
 }
 
@@ -172,17 +172,18 @@ const manejarError = (errores) => {
     mensajeError += "- Los apellidos solo pueden contener letras y espacios.\n";
   }
   if (errores.cedula) {
-    mensajeError += "- La cédula debe contener exactamente 9 dígitos.\n";
+    mensajeError +=
+      "- La cédula debe contener exactamente 10 dígitos y el formato ##-####-####..\n";
   }
   if (errores.celular) {
     mensajeError +=
-      "- El número de celular debe contener exactamente 8 dígitos.\n";
+      "- El número de celular debe contener exactamente 8 dígitos y debe cumplir con el formato ####-####.\n";
   }
   showToast(mensajeError);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Asociar la función registrarUsuario con el evento submit del formulario
+  // Asocia la función registrarUsuario con el evento submit del formulario
   document
     .getElementById("formulario")
     .addEventListener("submit", (event) => registrarUsuario(event));

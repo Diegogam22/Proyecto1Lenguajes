@@ -1,4 +1,4 @@
-// sobreNosotros.js
+
 
 // Función para mostrar todos los médicos en una tabla
 function mostrarTodosLosMedicos() {

@@ -1,3 +1,4 @@
+// es para mostrar los mensajes
 function showToast(message) {
   const toastContainer = document.getElementById("toast-container");
   const toast = document.createElement("div");
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Aquí utilizamos la misma función de encriptación que en el registro
+    // Aquí utilizamos la función de encriptación para poder comparar las contraseñas
     const hashedPassword = CryptoJS.SHA256(contrasenna).toString(
       CryptoJS.enc.Base64
     );

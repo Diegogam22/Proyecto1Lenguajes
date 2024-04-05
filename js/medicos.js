@@ -1,3 +1,4 @@
+//array de medicos
 const doctors = [
   {
     id: "1",
@@ -109,27 +110,28 @@ const doctors = [
   },
 ];
 
+// esto es para la paginacion
 const resultsPerPage = 6;
 let currentPage = 1;
 let filteredDoctors = [];
 
+// buscar los medicos
 function search() {
   const searchTerm = document.getElementById("searchInput").value.toLowerCase();
   const datalist = document.getElementById("doctorList");
 
-  // Filtrar los médicos según el término de búsqueda
+  // Filtra los médicos según el término de búsqueda
   filteredDoctors = doctors.filter(
-    // Elimina 'const' o 'let' aquí
     (doctor) =>
       doctor.name.toLowerCase().includes(searchTerm) ||
       doctor.specialty.toLowerCase().includes(searchTerm) ||
       doctor.location.toLowerCase().includes(searchTerm)
   );
 
-  // Limpiar el datalist antes de agregar las nuevas opciones
+  // Limpia el datalist antes de agregar las nuevas opciones
   datalist.innerHTML = "";
 
-  // Agregar las opciones de autocompletado al datalist
+  // Agrega las opciones de autocompletado al datalist
   filteredDoctors.forEach((doctor) => {
     const option = document.createElement("option");
     option.value = doctor.name;
@@ -138,11 +140,13 @@ function search() {
   displayResults();
 }
 
+// Ordena los resultados según la opción seleccionada
+// Para filtrar u ordenas los datos de los medicos
 function sortResults() {
   const sortSelect = document.getElementById("sortSelect");
   const sortBy = sortSelect.value;
 
-  // Ordenar los resultados según la opción seleccionada
+  // Ordena los resultados según la opción seleccionada
   if (sortBy === "name") {
     filteredDoctors.sort((a, b) => a.name.localeCompare(b.name));
   } else if (sortBy === "specialty") {
@@ -151,10 +155,11 @@ function sortResults() {
     filteredDoctors.sort((a, b) => a.location.localeCompare(b.location));
   }
 
-  // Mostrar los resultados ordenados
+  // Muestra los resultados ordenados
   displayResults();
 }
 
+// muestra los resultados en la tabla
 function displayResults() {
   const startIndex = (currentPage - 1) * resultsPerPage;
   const endIndex = startIndex + resultsPerPage;
@@ -188,6 +193,7 @@ function displayResults() {
   buildPagination();
 }
 
+// paginacion
 function buildPagination() {
   const totalPages = Math.ceil(filteredDoctors.length / resultsPerPage);
   let paginationHTML = "";
@@ -204,6 +210,7 @@ function goToPage(page) {
   displayResults();
 }
 
+// modal para ver los detalles de un medico en especifico
 function openModal(doctorId) {
   const selectedDoctor = doctors.find((doctor) => doctor.id === doctorId);
   const modalContent = document.getElementById("modalContent");
@@ -241,22 +248,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const medicoSelect = document.getElementById("medico");
   const especialidadSelect = document.getElementById("especialidad");
 
-  // Agregar evento change al select de médico
+  // Agrega evento change al select de médico
   medicoSelect.addEventListener("change", function () {
-    // Obtener el valor seleccionado del médico
+    // Obtene el valor seleccionado del médico
     const selectedMedicoId = this.value;
-    // Filtrar el array de médicos por el médico seleccionado
+    // Filtra el array de médicos por el médico seleccionado
     const selectedMedico = doctors.find(
       (doctor) => doctor.id === selectedMedicoId
     );
-    // Obtener la especialidad del médico seleccionado
+    // Obtiene la especialidad del médico seleccionado
     const selectedEspecialidad = selectedMedico.specialty;
-    // Filtrar los médicos por la especialidad seleccionada
+    // Filtra los médicos por la especialidad seleccionada
     const filteredByEspecialidad = doctors.filter(
       (doctor) => doctor.specialty === selectedEspecialidad
     );
 
-    // Limpiar y actualizar el select de especialidad con las opciones filtradas
+    // Limpia y actualiza el select de especialidad con las opciones filtradas
     especialidadSelect.innerHTML = "";
     filteredByEspecialidad.forEach((doctor) => {
       const especialidadOption = document.createElement("option");
@@ -266,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Llamar a la función para cargar los médicos después de asignar el evento change
+  // Llama a la función para cargar los médicos después de asignar el evento change
   cargarMedicos();
 });
 
@@ -284,7 +291,6 @@ function cargarMedicos() {
     medicoSelect.appendChild(medicoOption);
   });
 
-  // También necesitas cargar las especialidades al inicio, en caso de que no se seleccione un médico
   const allSpecialties = doctors.map((doctor) => doctor.specialty);
   const uniqueSpecialties = [...new Set(allSpecialties)];
   uniqueSpecialties.forEach((specialty) => {
