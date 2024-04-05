@@ -1,13 +1,13 @@
 const images = [
-  "../img/dermatologia.jpg",
-  "../img/pediatria.jpg",
-  "../img/Ginecologia.webp",
-  "../img/Cardiologia.webp",
-  "../img/cirugia.webp",
-  "../img/endocrinologia.jpg",
-  "../img/neurologia.jpg",
-  "../img/oftalmologia.jpg",
-  "../img/ortopedia.jpg",
+  "./img/dermatologia.jpg",
+  "./img/pediatria.jpg",
+  "./img/Ginecologia.webp",
+  "./img/Cardiologia.webp",
+  "./img/cirugia.webp",
+  "./img/endocrinologia.jpg",
+  "./img/neurologia.jpg",
+  "./img/oftalmologia.jpg",
+  "./img/ortopedia.jpg",
 ];
 
 const carouselImagesContainer = document.getElementById(
