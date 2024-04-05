@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica Árbol de Seda - Sistema de Citas Médicas</title>
+    <link rel="stylesheet" href="./css/estiloGeneral.css" />
+    <link rel="stylesheet" href="./css/estiloNav.css" />
+    <link rel="stylesheet" href="./css/estiloIndex.css" />
+    <link rel="stylesheet" href="./css/estiloFooter.css" />
+  </head>
+  <body>
+    <div class="contenedor__principal">
+      <header>
+        <h1>
+          <a href="index.html"
+            >Sistema de Citas Médicas de la Clínica Árbol de Seda</a
+          >
+        </h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="./HTML_Pages/inicioSesion.html">Inicio de sesión</a>
+            </li>
+            <li id="agenda-citas">
+              <a href="./HTML_Pages/citas.html">Agenda de citas</a>
+            </li>
+            <li>
+              <a href="./HTML_Pages/busquedaMedicos.html"
+                >Búsqueda de médicos</a
+              >
+            </li>
+            <li>
+              <a href="./HTML_Pages/sobreNosotros.html">Sobre nosotros</a>
+            </li>
+            <li><a href="./HTML_Pages/servicios.html">Servicios</a></li>
+            <li>
+              <a href="./HTML_Pages/contacto.html">Información de contacto</a>
+            </li>
+            <li>
+              <a href="./HTML_Pages/preguntasFrecuentes.html"
+                >Preguntas frecuentes</a
+              >
+            </li>
+            <li>
+              <a href="./pdf/Politica.pdf" target="_blank"
+                >Política de privacidad y términos de uso</a
+              >
+            </li>
+            <li>
+              <a href="#" id="cerrarSesion">Cerrar sesión</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <div class="description">
+          <h2>Bienvenido al sistema de citas médicas</h2>
+          <p>
+            El sistema de citas médicas de la Clínica Árbol de Seda le permite
+            reservar citas con médicos y especialistas de manera rápida y
+            conveniente.
+          </p>
+        </div>
+
+        <div class="carousel-container">
+          <div id="carousel-images-container" class="carousel-images"></div>
+          <div id="carousel-buttons-container" class="carousel-buttons"></div>
+        </div>
+
+        <div class="heart-container">
+          <div class="heart"></div>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+    <script src="./js/carrusel.js"></script>
+    <script src="./js/verificarAutenticacion.js"></script>
+    <script src="./js/footer.js"></script>
+    <script src="./js/cerrarSesion.js"></script>
+  </body>
+</html>

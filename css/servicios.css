@@ -1,0 +1,45 @@
+.service-description {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+.service-description h2 {
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.service-description p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.appointment-types {
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-types h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.appointment-types ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.appointment-types li.tipos {
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.appointment-types li.tipos::before {
+  content: "•"; /* Agrega un punto antes de cada elemento */
+  margin-right: 5px; /* Espacio entre el punto y el texto */
+}

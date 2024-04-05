@@ -1,0 +1,32 @@
+/* Estilos para el acordeón */
+details {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+/* Estilos para el encabezado del acordeón */
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  list-style: none; /* Elimina el estilo de viñeta predeterminado */
+}
+
+/* Estilos para el contenido del acordeón */
+details div {
+  background-color: #fff;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: max-height 0.3s ease-out; /* Transición suave de 300ms */
+  max-height: 0; /* Oculta el contenido inicialmente */
+  overflow: hidden; /* Evita que el contenido desborde */
+}
+
+/* Muestra el contenido cuando el acordeón está abierto */
+details[open] div {
+  max-height: 500px; /* Ajusta este valor según la cantidad de contenido */
+}

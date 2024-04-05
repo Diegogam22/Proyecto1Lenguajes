@@ -1,0 +1,162 @@
+.search-bar {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 10px;
+}
+
+.results {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.results th,
+.results td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.results th {
+  background-color: #f2f2f2;
+}
+
+.buscar {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buscar:hover {
+  background-color: rgb(0, 178, 178);
+}
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Ocultar el modal por defecto */
+  position: fixed; /* Posición fija en la ventana del navegador */
+  z-index: 1; /* Colocar el modal por encima del resto del contenido */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho completo */
+  height: 100%; /* Altura completa */
+  overflow: auto; /* Agregar desplazamiento si es necesario */
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+}
+
+/* Contenido del modal */
+.modal-content {
+  background-color: #fefefe; /* Fondo blanco */
+  margin: 15% auto; /* Centrar vertical y horizontalmente */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Ancho del contenido del modal */
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+}
+
+/* Botón para cerrar el modal */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.details-button {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background-color: rgb(0, 178, 178);
+}
+
+/* Estilos para el filtro de búsqueda */
+.search-bar select {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilos para el filtro de búsqueda al pasar el mouse por encima */
+.search-bar select:hover {
+  background-color: rgb(0, 178, 178);
+}
+
+/* Estilos para las opciones del filtro */
+.search-bar select option {
+  padding: 10px;
+}
+
+#pagination {
+  text-align: center;
+}
+
+.pagination-button {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.pagination-button:hover {
+  background-color: rgb(0, 178, 178);
+}
+
+#autocompleteResults {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+#autocompleteResults li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#autocompleteResults li:hover {
+  background-color: #f4f4f4;
+}
+
+.ver-detalles-button {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.ver-detalles-button:hover {
+  background-color: rgb(0, 178, 178);
+}

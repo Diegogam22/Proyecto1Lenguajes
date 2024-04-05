@@ -1,0 +1,36 @@
+header {
+  background-color: #0c8e95;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+}
+
+nav {
+  background-color: #0c8e95;
+}
+
+a {
+  color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  display: inline;
+}
+
+li a {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+li a:hover {
+  background-color: #555;
+}

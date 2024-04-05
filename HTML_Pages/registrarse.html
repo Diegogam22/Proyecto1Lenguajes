@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="../css/estiloGeneral.css" />
+    <link rel="stylesheet" href="../css/estiloNav.css" />
+    <link rel="stylesheet" href="../css/estiloInicioSesion.css" />
+    <link rel="stylesheet" href="../css/estiloFooter.css" />
+  </head>
+  <body>
+    <div class="contenedor__principal">
+      <header id="navbar"></header>
+      <main>
+        <div class="contenido">
+          <div class="formulario">
+            <h2>Registro de Usuario</h2>
+            <form id="formulario" method="post">
+              <div class="usuarios">
+                <label>Cédula</label>
+                <input id="cedula" type="text" required />
+              </div>
+              <div class="usuarios">
+                <label>Nombre</label>
+                <input id="nombre" type="text" required />
+              </div>
+              <div class="usuarios">
+                <label>Apellidos</label>
+                <input id="apellidos" type="text" required />
+              </div>
+              <div class="usuarios">
+                <label>Celular</label>
+                <input id="celular" type="text" required />
+              </div>
+              <div class="usuarios">
+                <label>Correo</label>
+                <input id="correo" type="email" required />
+              </div>
+              <div class="usuarios">
+                <label>Contraseña</label>
+                <input id="contrasenna" type="password" required />
+              </div>
+              <div class="usuarios">
+                <label>Confirmar Contraseña</label>
+                <input id="confirmarContrasenna" type="password" required />
+              </div>
+              <input id="botonRegistrar" type="submit" value="Registrar" />
+            </form>
+          </div>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+
+    <div id="toast-container"></div>
+  </body>
+
+  <script src="../js/navbar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="../js/registrarse.js"></script>
+  <script src="../js/verificarAutenticacion.js"></script>
+  <script src="../js/footer.js"></script>
+  <script src="../js/cerrarSesion.js"></script>
+</html>

@@ -1,0 +1,72 @@
+/* sobreNosotros.css */
+
+.company-info,
+.team-info {
+  margin-bottom: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Agregando sombra */
+  padding: 30px;
+}
+
+.company-info h2,
+.team-info h2 {
+  font-size: 28px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.company-info h3,
+.team-info h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.company-info p,
+.team-info p {
+  font-size: 16px;
+  line-height: 1.6;
+ 
+}
+
+.descripcion,
+.mision,
+.vision {
+  margin-bottom: 20px;
+}
+
+#searchResults {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Espacio adicional debajo de la tabla */
+}
+
+#searchResults th,
+#searchResults td {
+  padding: 8px;
+  border: 1px solid #ddd; /* Borde para las celdas */
+}
+
+#searchResults th {
+  background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+
+/* Estilos para el contenedor de paginación */
+.pagination {
+  text-align: center;
+}
+
+.pagination button {
+  background-color: rgb(0, 73, 83);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.pagination button:hover {
+  background-color: rgb(0, 178, 178);
+}

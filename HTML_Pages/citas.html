@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda de Citas Médicas</title>
+    <!-- Enlaces a tus archivos CSS -->
+    <link rel="stylesheet" href="../css/estiloGeneral.css" />
+    <link rel="stylesheet" href="../css/estiloNav.css" />
+    <link rel="stylesheet" href="../css/estiloCitas.css" />
+    <link rel="stylesheet" href="../css/estiloFooter.css" />
+  </head>
+  <body>
+    <div class="contenedor__principal">
+      <main>
+        <div id="programarCitaFormulario">
+          <h2>Programar Nueva Cita</h2>
+          <form id="programarCitaForm">
+            <label for="fechaHora">Fecha y Hora:</label>
+            <input type="datetime-local" id="fechaHora" required />
+            <label for="medico">Médico:</label>
+            <select id="medico" required></select>
+            <label for="especialidad">Especialidad:</label>
+            <select id="especialidad" required></select>
+            <button type="submit">Programar Cita</button>
+          </form>
+        </div>
+
+        <div id="modificarCancelarCitaFormulario">
+          <h2>Modificar/Cancelar Cita</h2>
+          <form id="modificarCancelarCitaForm">
+            <label for="citas">Seleccionar Cita:</label>
+            <select id="citas" required></select>
+            <button type="button" id="modificarCitaBtn">Modificar Cita</button>
+            <button type="button" id="cancelarCitaBtn">Cancelar Cita</button>
+          </form>
+        </div>
+
+        <div id="calendario-container">
+          <h2>Calendario de citas</h2>
+          <h6 id="nombreMes"></h6>
+          <div id="calendario"></div>
+          <button id="btnMesAnterior">Mes Anterior</button>
+          <button id="btnMesSiguiente">Mes Siguiente</button>
+          <h2>Historial de Citas</h2>
+          <table id="historialCitas">
+            <thead>
+              <tr>
+                <th>Fecha y Hora</th>
+                <th>Médico</th>
+                <th>Especialidad</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="../js/navbar.js"></script>
+    <script src="../js/medicos.js" defer></script>
+    <script src="../js/citas.js" defer></script>
+    <script src="../js/footer.js"></script>
+    <script src="../js/cerrarSesion.js"></script>
+  </body>
+</html>

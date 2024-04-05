@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Información de Contacto</title>
+    <link rel="stylesheet" href="../css/estiloGeneral.css" />
+    <link rel="stylesheet" href="../css/estiloNav.css" />
+    <link rel="stylesheet" href="../css/estiloContacto.css" />
+    <link rel="stylesheet" href="../css/estiloFooter.css" />
+  </head>
+  <body>
+    <div class="contenedor__principal">
+      <header id="navbar"></header>
+      <main>
+        <div class="contact-info">
+          <h2>Detalles de contacto</h2>
+          <p>Dirección: Turrialba centro</p>
+          <p>Número de Teléfono: 2556-8080</p>
+          <p>Correo Electrónico: clinicaarbolseda@gmail.com</p>
+        </div>
+
+        <div class="contact-form">
+          <h2>Formulario de contacto</h2>
+          <form action="">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required />
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required />
+
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit" id="submit-button">Enviar</button>
+          </form>
+        </div>
+
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2336.993237143344!2d-83.68314590429748!3d9.905742068056469!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scr!4v1711772279609!5m2!1ses-419!2scr"
+            width="800"
+            height="600"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </main>
+      <footer id="footer"></footer>
+    </div>
+
+    <div id="toast-container"></div>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/verificarAutenticacion.js"></script>
+    <script src="../js/contacto.js"></script>
+    <script src="../js/footer.js"></script>
+    <script src="../js/cerrarSesion.js"></script>
+  </body>
+</html>
