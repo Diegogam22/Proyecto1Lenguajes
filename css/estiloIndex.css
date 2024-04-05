@@ -46,11 +46,11 @@
 
 .carousel-container {
   position: relative;
-  width: 50rem;
+  width: 100%; /* Cambiado a ancho del 100% para ser responsive */
+  max-width: 50rem; /* Agregado max-width para limitar el ancho máximo */
   height: 25rem;
   overflow: hidden;
   margin: 0 auto;
-  position: relative;
 }
 
 .carousel-images {
@@ -79,7 +79,6 @@
   border: none;
   padding: 0.4rem;
   border-radius: 50%;
-
   cursor: pointer;
   transition: padding 300ms ease-in-out;
 }
@@ -88,4 +87,18 @@
   border-radius: 2rem;
   padding: 0.4rem 1rem;
   background-color: rgb(0, 73, 83);
+}
+
+@media screen and (max-width: 768px) {
+  .carousel-container {
+    height: 15rem; /* Reducir la altura para adaptarse a pantallas más pequeñas */
+  }
+
+  .carousel-image {
+    aspect-ratio: 4 / 3; /* Cambiar la relación de aspecto para adaptarse mejor a pantallas más pequeñas */
+  }
+
+  .carousel-buttons {
+    bottom: 1rem; /* Ajustar la posición de los botones en pantallas más pequeñas */
+  }
 }
